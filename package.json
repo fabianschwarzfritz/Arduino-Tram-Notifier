@@ -1,0 +1,26 @@
+{
+  "name": "tram-notifier",
+  "version": "0.0.1",
+  "description": "Arduino notifies when tram is arriving",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/typescript/bin/tsc",
+    "start": "npm run build && node build/index.js",
+    "test": "npm run build && ./node_modules/mocha/bin/mocha build/test/test.js"
+  },
+  "author": "Fabian Schwarz-Fritz",
+  "license": "MIT",
+  "dependencies": {
+    "@types/johnny-five": "^1.3.0",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.0",
+    "@types/request": "^2.48.4",
+    "johnny-five": "^1.4.0",
+    "mocha": "^7.1.1",
+    "request": "^2.88.2",
+    "sinon": "^9.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
