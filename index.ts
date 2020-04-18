@@ -13,14 +13,14 @@ new StartParameter(process.env).validate();
 /**
  * Main function called when the board is booted and in ready state
  */
-board.on('ready', function () {
+board.on('ready', () => {
   const led = new Led(13);
 
-  setInterval(function() {
+  setInterval(() => {
     request.get({
       url: getUrl(),
       headers: getHeaders()
-    }, function(error: Error, response: any, body: any) {
+    }, (error: Error, response: any, body: any) => {
       if (error) {
           console.log(`Error requesting data ${error}`);
           signalError(led);
@@ -28,7 +28,7 @@ board.on('ready', function () {
       }
 
       const stop = JSON.parse(body);
-      const workrelevant = stop.listOfDepartures.filter(function(departure: any) {
+      const workrelevant = stop.listOfDepartures.filter((departure: any) => {
         return departure.direction == "Bismarckplatz";
       });
       const next = workrelevant[0];
@@ -50,21 +50,21 @@ board.on('ready', function () {
 /**
  * Signals running status.
  */
-function signalActive(l: any) {
+const signalActive = (l: any) => {
   l.strobe(1000);
 }
 
 /**
  * Signals an error retrieving data.
  */
-function signalError(l: any) {
+const signalError = (l: any) => {
   l.strobe(100);
 }
 
 /**
  * Returns the URL to request the data for station "Eppelheimer Terasse".
  */
-function getUrl() {
+const getUrl = () => {
   // This is the stop id for station "Eppelheimer Terasse"
   const stopId = '4275';
   // When we set the *time* url parameter to 'null', we get the current time.
@@ -74,7 +74,7 @@ function getUrl() {
 /**
  * Returns an object containing all header information required for authentication and a correct request to the API.
  */
-function getHeaders() {
+const getHeaders = () => {
   return {
     'RNV_API_TOKEN': process.env.RNV_API_TOKEN,
     'Content-Type': 'application/json'
