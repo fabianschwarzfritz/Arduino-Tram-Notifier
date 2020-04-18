@@ -3,7 +3,7 @@ import { StartParameter } from "./StartParameter";
 import { Display } from "./Display";
 
 const request = require('request');
-const { five, Board, Led } = require('johnny-five');
+const { Board } = require('johnny-five');
 const board = new Board();
 
 // Interval in ms how often we want to update the data
