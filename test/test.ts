@@ -12,11 +12,14 @@ describe('PrettyTime', () => {
   it('#predicteTime next day', () => {
     assertTime('15:45', new PrettyTime().predictedTime('14.03.2020 15:45+0'));
   });
-  it('#predicteTime delay', () => {
+  it('#predicteTime delay leading zero', () => {
     assertTime('15:49', new PrettyTime().predictedTime('15:45+04'));
   });
-  it('#predicteTime delay', () => {
+  it('#predicteTime delay no leading zero', () => {
     assertTime('15:49', new PrettyTime().predictedTime('15:45+4'));
+  });
+  it('#predicteTime delay in next hour', () => {
+    assertTime('16:02', new PrettyTime().predictedTime('15:59+3'));
   });
   it('#predicteTime simple', () => {
     assertTime('15:45', new PrettyTime().predictedTime('15:45'));
