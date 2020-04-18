@@ -1,6 +1,7 @@
 import { PrettyTime } from "./PrettyTime";
 import { StartParameter } from "./StartParameter";
 import { Display } from "./Display";
+import { TimeLeft } from "./TimeLeft";
 
 const request = require('request');
 const { Board } = require('johnny-five');
@@ -46,6 +47,10 @@ board.on('ready', () => {
         && stop.pastRequestText !== 'n/a') {
         console.log(`Past Request Text: ${stop.pastRequestText}`);
       }
+
+      const timeLeft = new TimeLeft();
+      const minutesLeft = timeLeft.minutes(next.time);
+      timeLeft.writeStatus(minutesLeft, display);
     });
   }, INTERVAL);
 });
