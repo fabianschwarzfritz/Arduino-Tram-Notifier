@@ -87,7 +87,7 @@ function predictedTime(stationTime: string) {
   let time = '';
   if(splitDate.length === 2) {
     time = splitDate[1];
-  } else if(time.length === 1) {
+  } else if(splitDate.length === 1) {
     time = splitDate[0]
   } else {
     throw new Error('Unknown time format');
@@ -109,8 +109,12 @@ function predictedTime(stationTime: string) {
     const predicted = new Date(datestring);
     minutesLater = parseInt(minutesLater);
     predicted.setUTCMinutes(predicted.getUTCMinutes() + minutesLater);
-
-    planned = `${predicted.getHours()}:${predicted.getMinutes()}`;
+    const predictedMinutes = predicted.getUTCMinutes();
+    // As we have done calculation with the minutes,
+    // we have to add the leading zero.
+    const minutesText = (predictedMinutes < 10 ? '0' : '') + predicted.getMinutes();
+    const hoursText = predicted.getHours();
+    planned = `${hoursText}:${minutesText}`;
   } else if(time.length === 1) {
     planned = time[0];
   } else {
