@@ -1,6 +1,7 @@
 const sinon = require('sinon');
 const chai = require('chai');
 import { PrettyTime } from "./../PrettyTime";
+import { StartParameter } from "./../StartParameter";
 
 describe('PrettyTime', function() {
 
@@ -19,6 +20,17 @@ describe('PrettyTime', function() {
   });
   it('#predicteTime simple', function() {
     assertTime('15:45', new PrettyTime().predictedTime('15:45'));
+  });
+});
+
+describe('StartParemeter', function() {
+  it('#validate throws an error when env variable is not set', function() {
+    chai.expect(() => { new StartParameter({}).validate() }).to.throw(Error);
+  });
+  it('#validate passes when all env variables are set', function() {
+    chai.expect(() => { new StartParameter({
+      'RNV_API_TOKEN': 'test'
+    }).validate() }).not.to.throw(Error);
   });
 });
 

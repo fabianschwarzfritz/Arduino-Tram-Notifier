@@ -1,18 +1,14 @@
 import { PrettyTime } from "./PrettyTime";
+import { StartParameter } from "./StartParameter";
 
 const request = require('request');
 const { five, Board, Led } = require('johnny-five');
 const board = new Board();
 
-/**
- * We abort the process when any of the required environmen variables is not set
- */
-if (!process.env.RNV_API_TOKEN) {
-  throw new Error('No API token via RNV_API_TOKEN set!');
-}
-
 // Interval in ms how often we want to update the data
 const INTERVAL = 1000;
+
+new StartParameter(process.env).validate();
 
 /**
  * Main function called when the board is booted and in ready state
