@@ -1,5 +1,6 @@
 import { PrettyTime } from "./PrettyTime";
 import { StartParameter } from "./StartParameter";
+import { Display } from "./Display";
 
 const request = require('request');
 const { five, Board, Led } = require('johnny-five');
@@ -14,7 +15,13 @@ new StartParameter(process.env).validate();
  * Main function called when the board is booted and in ready state
  */
 board.on('ready', () => {
-  const led = new Led(13);
+  const display = new Display({
+    red: 4,
+    yellow: 3,
+    green: 2,
+  });
+
+  display.stayHome();
 
   setInterval(() => {
     request.get({
@@ -23,7 +30,7 @@ board.on('ready', () => {
     }, (error: Error, response: any, body: any) => {
       if (error) {
           console.log(`Error requesting data ${error}`);
-          signalError(led);
+          display.error();
           return;
       }
 
@@ -39,27 +46,9 @@ board.on('ready', () => {
         && stop.pastRequestText !== 'n/a') {
         console.log(`Past Request Text: ${stop.pastRequestText}`);
       }
-
-      signalActive(led);
     });
   }, INTERVAL);
-
-  signalActive(led);
 });
-
-/**
- * Signals running status.
- */
-const signalActive = (l: any) => {
-  l.strobe(1000);
-}
-
-/**
- * Signals an error retrieving data.
- */
-const signalError = (l: any) => {
-  l.strobe(100);
-}
 
 /**
  * Returns the URL to request the data for station "Eppelheimer Terasse".
