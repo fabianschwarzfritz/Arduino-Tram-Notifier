@@ -1,5 +1,9 @@
 import { Display } from "./Display";
 
+/**
+ * TimeLeft calculates how many minutes are left and
+ * sets the status accordingly on the display.
+ */
 export class TimeLeft {
 
   private static READY = 12;
