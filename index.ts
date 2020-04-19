@@ -50,6 +50,7 @@ board.on('ready', () => {
 
       const timeLeft = new TimeLeft();
       const minutesLeft = timeLeft.minutes(next.time);
+      console.log(`${minutesLeft} minutes left for the next tram`);
       timeLeft.writeStatus(minutesLeft, display);
     });
   }, INTERVAL);

@@ -50,8 +50,8 @@ export class PrettyTime {
       const datestring = '1970-01-01T' + planned + ':00+01:00';
       const predicted = new Date(datestring);
       minutesLater = parseInt(minutesLater);
-      predicted.setUTCMinutes(predicted.getUTCMinutes() + minutesLater);
-      const predictedMinutes = predicted.getUTCMinutes();
+      predicted.setUTCMinutes(predicted.getMinutes() + minutesLater);
+      const predictedMinutes = predicted.getMinutes();
       // As we have done calculation with the minutes,
       // we have to add the leading zero.
       const minutesText = (predictedMinutes < 10 ? '0' : '') + predicted.getMinutes();

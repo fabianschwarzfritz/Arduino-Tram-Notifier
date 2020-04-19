@@ -27,10 +27,10 @@ export class TimeLeft {
     const plannedStationTime = splitTime[0];
     const hour = parseInt(plannedStationTime.split(':')[0]);
     const minutes = parseInt(plannedStationTime.split(':')[1]);
-    predicted.setUTCHours(hour);
-    predicted.setUTCMinutes(minutes);
+    predicted.setHours(hour);
+    predicted.setMinutes(minutes);
     const minutesLater = parseInt(splitTime[1]);
-    predicted.setUTCMinutes(predicted.getUTCMinutes() + minutesLater);
+    predicted.setMinutes(predicted.getMinutes() + minutesLater);
 
     const now = new Date();
     return this.diffMinutes(predicted, now);

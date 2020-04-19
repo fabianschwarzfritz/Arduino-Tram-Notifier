@@ -37,28 +37,28 @@ describe('TimeLeft', () => {
     const fakeDate = new Date(1577876400 * 1000);
     sinon.useFakeTimers(fakeDate.getTime());
     const timeLeft = new TimeLeft();
-    assertMinutes(10, timeLeft.minutes('11:10+0'));
+    assertMinutes(10, timeLeft.minutes('12:10+0'));
   });
 
   it('#minutes returns the minutes without delay on the same day', function() {
     const fakeDate = new Date(1577876400 * 1000);
     sinon.useFakeTimers(fakeDate.getTime());
     const timeLeft = new TimeLeft();
-    assertMinutes(5, timeLeft.minutes('11:05+0'));
+    assertMinutes(5, timeLeft.minutes('12:05+0'));
   });
 
   it('#minutes returns the minutes with delay on the same day', function() {
     const fakeDate = new Date(1577876400 * 1000);
     sinon.useFakeTimers(fakeDate.getTime());
     const timeLeft = new TimeLeft();
-    assertMinutes(7, timeLeft.minutes('11:05+2'));
+    assertMinutes(7, timeLeft.minutes('12:05+2'));
   });
 
   it('#minutes returns the minutes with delay on the same day', function() {
     const fakeDate = new Date(1577876400 * 1000);
     sinon.useFakeTimers(fakeDate.getTime());
     const timeLeft = new TimeLeft();
-    assertMinutes(80, timeLeft.minutes('11:05+75'));
+    assertMinutes(80, timeLeft.minutes('12:05+75'));
   });
 
   it('#writeStatus too long time', function() {
