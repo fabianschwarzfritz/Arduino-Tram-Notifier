@@ -10,8 +10,30 @@ export class TimeLeft {
   private static GOGO = 8;
   private static TOOLATE = 5;
 
-  minutes(input: string): number {
-    return 6;
+  private diffMinutes(between: Date, and: Date) {
+    let diff = (between.getTime() - and.getTime()) / 1000;
+    diff /= 60
+    return Math.abs(Math.round(diff));
+  }
+
+  minutes(stationTime: string): number {
+    const splitTime  = stationTime.split('+');
+
+    if(splitTime.length !== 2) {
+      throw new Error('Unknown station time format');
+    }
+
+    const predicted= new Date();
+    const plannedStationTime = splitTime[0];
+    const hour = parseInt(plannedStationTime.split(':')[0]);
+    const minutes = parseInt(plannedStationTime.split(':')[1]);
+    predicted.setUTCHours(hour);
+    predicted.setUTCMinutes(minutes);
+    const minutesLater = parseInt(splitTime[1]);
+    predicted.setUTCMinutes(predicted.getUTCMinutes() + minutesLater);
+
+    const now = new Date();
+    return this.diffMinutes(predicted, now);
   }
 
   writeStatus(minutesLeft: number, display: Display) {
