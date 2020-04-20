@@ -10,8 +10,8 @@ First version:
  - [ ] Enable wifi connection (instead of cable connection).
 
 ## Versions
-###  0.1.0
-Initial version. Displays the status on three (red/yellow/green) LEDs to notify when to leave the house. Many values are hard-coded: led pins, RNV url, tram station and request interval.
 ###  0.1.1
 Fix display status after a network connection was interrupted.
+###  0.1.0
+Initial version. Displays the status on three (red/yellow/green) LEDs to notify when to leave the house. Many values are hard-coded: led pins, RNV url, tram station and request interval.
 
