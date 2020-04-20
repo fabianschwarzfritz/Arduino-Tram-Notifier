@@ -4,6 +4,87 @@ import { PrettyTime } from "./../PrettyTime";
 import { StartParameter } from "./../StartParameter";
 import { Display } from "./../Display";
 import { TimeLeft } from "./../TimeLeft";
+import { Led } from "johnny-five";
+
+describe('Display', () => {
+  it('#stayHome', function() {
+    const red = sinon.createStubInstance(Led);
+    const yellow = sinon.createStubInstance(Led);
+    const green = sinon.createStubInstance(Led);
+
+    const display = new Display(red, yellow, green);
+    display.stayHome();
+
+    // Everything was called
+    sinon.assert.called(red.stop);
+    sinon.assert.called(red.off);
+    sinon.assert.called(yellow.stop);
+    sinon.assert.called(yellow.off);
+    sinon.assert.called(green.stop);
+    sinon.assert.called(green.off);
+    sinon.assert.called(red.on);
+    // But in the end red should be 'on'.
+    sinon.assert.callOrder(red.off, red.on);
+  });
+  it('#getReady', function() {
+    const red = sinon.createStubInstance(Led);
+    const yellow = sinon.createStubInstance(Led);
+    const green = sinon.createStubInstance(Led);
+
+    const display = new Display(red, yellow, green);
+    display.getReady();
+
+    // Everything was called
+    sinon.assert.called(red.stop);
+    sinon.assert.called(red.off);
+    sinon.assert.called(yellow.stop);
+    sinon.assert.called(yellow.off);
+    sinon.assert.called(green.stop);
+    sinon.assert.called(green.off);
+    sinon.assert.called(yellow.on);
+    // But in the end yellow should be 'on'.
+    sinon.assert.callOrder(yellow.off, yellow.on);
+  });
+  it('#leaveHouse', function() {
+    const red = sinon.createStubInstance(Led);
+    const yellow = sinon.createStubInstance(Led);
+    const green = sinon.createStubInstance(Led);
+
+    const display = new Display(red, yellow, green);
+    display.leaveHouse();
+
+    // Everything was called
+    sinon.assert.called(red.stop);
+    sinon.assert.called(red.off);
+    sinon.assert.called(yellow.stop);
+    sinon.assert.called(yellow.off);
+    sinon.assert.called(green.stop);
+    sinon.assert.called(green.off);
+    sinon.assert.called(green.on);
+    // But in the end red should be 'on'.
+    sinon.assert.callOrder(green.off, green.on);
+  });
+  it('#error', function() {
+    const red = sinon.createStubInstance(Led);
+    const yellow = sinon.createStubInstance(Led);
+    const green = sinon.createStubInstance(Led);
+
+    const display = new Display(red, yellow, green);
+    display.error();
+
+    // Everything was called
+    sinon.assert.called(red.stop);
+    sinon.assert.called(red.off);
+    sinon.assert.called(yellow.stop);
+    sinon.assert.called(yellow.off);
+    sinon.assert.called(green.stop);
+    sinon.assert.called(green.off);
+    // But in the end red should be 'on'.
+    sinon.assert.callOrder(red.off, red.strobe);
+    sinon.assert.callOrder(yellow.off, yellow.strobe);
+    sinon.assert.callOrder(green.off, green.strobe);
+  });
+});
 
 describe('PrettyTime', () => {
 

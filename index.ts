@@ -16,7 +16,7 @@ new StartParameter(process.env).validate();
  * Main function called when the board is booted and in ready state
  */
 board.on('ready', () => {
-  const display = new Display({
+  const display = Display.fromPins({
     red: 4,
     yellow: 3,
     green: 2,

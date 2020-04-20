@@ -5,10 +5,16 @@ export class Display {
   private yellow: Led;
   private green: Led;
 
-  constructor(connection: Record<string, number>) {
+  constructor(red: Led, yellow: Led, green: Led) {
+    this.red = red;
+    this.yellow = yellow;
+    this.green = green;
+  }
+
+  static fromPins(connection: Record<string, number>) {
     const pinRed = connection.red;
     const pinYellow = connection.yellow;
-    const pinGreen = connection.green;
+    const pinGreen = connection.green ;
 
     if (typeof pinRed !== "number"
         || typeof pinYellow !== "number"
@@ -16,30 +22,39 @@ export class Display {
       throw new Error('Required pins not provided')
     }
 
-    this.red = new Led(pinRed);
-    this.yellow = new Led(pinYellow);
-    this.green= new Led(pinGreen);
+    return new Display(
+      new Led(pinRed),
+      new Led(pinYellow),
+      new Led(pinGreen)
+    );
+  }
+
+  private resetDisplay() {
+    this.red.stop(1);
+    this.red.off();
+    this.yellow.stop(1);
+    this.yellow.off();
+    this.green.stop(1);
+    this.green.off();
   }
 
   stayHome() {
+    this.resetDisplay();
     this.red.on();
-    this.yellow.off();
-    this.green.off();
   }
 
   getReady() {
-    this.red.off();
+    this.resetDisplay();
     this.yellow.on();
-    this.green.off();
   }
 
   leaveHouse() {
-    this.red.off();
-    this.yellow.off();
+    this.resetDisplay();
     this.green.on();
   }
 
   error() {
+    this.resetDisplay();
     this.red.strobe(100);
     this.yellow.strobe(100);
     this.green.strobe(100);
