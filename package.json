@@ -1,6 +1,6 @@
 {
   "name": "tram-notifier",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Arduino notifies when tram is arriving",
   "main": "index.js",
   "scripts": {
