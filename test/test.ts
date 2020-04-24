@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const chai = require('chai');
 import { PrettyTime } from "./../PrettyTime";
 import { StartParameter } from "./../StartParameter";
-import { Display } from "./../Display";
+import { LedDisplay } from "../LedDisplay";
 import { TimeLeft } from "./../TimeLeft";
 import { Led } from "johnny-five";
 
@@ -12,7 +12,7 @@ describe('Display', () => {
     const yellow = sinon.createStubInstance(Led);
     const green = sinon.createStubInstance(Led);
 
-    const display = new Display(red, yellow, green);
+    const display = new LedDisplay(red, yellow, green);
     display.stayHome();
 
     // Everything was called
@@ -31,7 +31,7 @@ describe('Display', () => {
     const yellow = sinon.createStubInstance(Led);
     const green = sinon.createStubInstance(Led);
 
-    const display = new Display(red, yellow, green);
+    const display = new LedDisplay(red, yellow, green);
     display.getReady();
 
     // Everything was called
@@ -50,7 +50,7 @@ describe('Display', () => {
     const yellow = sinon.createStubInstance(Led);
     const green = sinon.createStubInstance(Led);
 
-    const display = new Display(red, yellow, green);
+    const display = new LedDisplay(red, yellow, green);
     display.leaveHouse();
 
     // Everything was called
@@ -69,7 +69,7 @@ describe('Display', () => {
     const yellow = sinon.createStubInstance(Led);
     const green = sinon.createStubInstance(Led);
 
-    const display = new Display(red, yellow, green);
+    const display = new LedDisplay(red, yellow, green);
     display.error();
 
     // Everything was called
@@ -143,7 +143,7 @@ describe('TimeLeft', () => {
   });
 
   it('#writeStatus too long time', function() {
-    const display = sinon.createStubInstance(Display, {
+    const display = sinon.createStubInstance(LedDisplay, {
       stayHome: sinon.spy()
     });
     const timeLeft = new TimeLeft();
@@ -151,7 +151,7 @@ describe('TimeLeft', () => {
     sinon.assert.called(display.stayHome);
   });
   it('#writeStatus get ready', function() {
-    const display = sinon.createStubInstance(Display, {
+    const display = sinon.createStubInstance(LedDisplay, {
       getReady: sinon.spy()
     });
     const timeLeft = new TimeLeft();
@@ -159,7 +159,7 @@ describe('TimeLeft', () => {
     sinon.assert.called(display.getReady);
   });
   it('#writeStatus get gogogo', function() {
-    const display = sinon.createStubInstance(Display, {
+    const display = sinon.createStubInstance(LedDisplay, {
       leaveHouse: sinon.spy()
     });
     const timeLeft = new TimeLeft();
@@ -167,7 +167,7 @@ describe('TimeLeft', () => {
     sinon.assert.called(display.leaveHouse);
   });
   it('#writeStatus get too late', function() {
-    const display = sinon.createStubInstance(Display, {
+    const display = sinon.createStubInstance(LedDisplay, {
       stayHome: sinon.spy()
     });
     const timeLeft = new TimeLeft();

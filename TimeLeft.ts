@@ -1,3 +1,4 @@
+import { LedDisplay } from "./LedDisplay";
 import { Display } from "./Display";
 
 /**

@@ -1,5 +1,6 @@
 import { PrettyTime } from "./PrettyTime";
 import { StartParameter } from "./StartParameter";
+import { LedDisplay } from "./LedDisplay";
 import { Display } from "./Display";
 import { TimeLeft } from "./TimeLeft";
 
@@ -16,11 +17,11 @@ new StartParameter(process.env).validate();
  * Main function called when the board is booted and in ready state
  */
 board.on('ready', () => {
-  const display = Display.fromPins({
+  const display = LedDisplay.fromPins({
     red: 4,
     yellow: 3,
     green: 2,
-  });
+  }) as Display;
 
   display.stayHome();
 
